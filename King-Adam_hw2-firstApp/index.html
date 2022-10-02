@@ -1,0 +1,90 @@
+<!-- this work was created entirely by me, Adam King, with the exception of
+the background images themselves and the CSS verification sticker.
+It is heavily based on a past assignment I did with similar requirements -->
+
+<!DOCTYPE html>
+<html lang="en">
+<!--
+File: /~aking/public_html/index.html
+Internet and WEb Systems Assignemnt 2: First Web Page
+Adam M. King, UMass Lowell Computer Science Student
+adam_king@student.uml.edu
+uml.cs username: aking
+Updated October 1, 2022
+-->
+   <head>
+       <meta charset="utf-8">
+       <title>
+           Adam King Website
+       </title>
+       <link href="css/style.css" rel="stylesheet">
+   </head>
+   <body>
+     <div id="intro">
+         <!-- Intro header with my name and school -->
+         <h1>Adam King</h1>
+         <p>University of Massachusetts Lowell</p>
+     </div>
+
+     <div id="social">
+         <!-- Links to some of my social media -->
+         <ul>
+             <li><a href="https://www.linkedin.com/in/adam-king-uml">Linkedin</a></li>
+             <li><a href="https://github.com/adk3798">Github</a></li>
+         </ul>
+     </div>
+       <!-- the wrapper div will hold everything outside of the header and social nav bar
+       this includes the about me section, my picture, the footer and assignment links -->
+       <div id="wrapper">
+
+           <!-- About me section will contain a picture of me, education-->
+           <div id="about">
+
+              <!-- links to a picture of me so viewers know what I look like (sort of, the picture is 4 years old) -->
+               <div class="me">
+                   <img src="images/me.jpg" alt="me" >
+               </div>
+
+               <!-- Brief brackground of my education. Just uses simple header and paragraph tags Also
+               includes my current classes -->
+               <div id="about_info">
+                   <h3>Work and Education</h3>
+                   <p>&emsp;&emsp;I graduated from Billerica Memorial High School in 2016.
+                   I currently work at Red Hat as a software engineer.
+                   Additionally, I am a part time graduate student at UMass Lowell working towards a Master's degree in Computer Science.
+                   This semester I am taking Internet and Web Systems I as well as Data Mining
+                   <br></p>
+
+                   <!-- "Hobbies". Used an unordered list format -->
+                   <!-- <h3>Hobbies</h3>
+                   <ul>
+                     <li>Going to class</li>
+                     <li>Checkers</li>
+                     <li>Creating lists</li>
+                   </ul> -->
+               </div>
+           </div>
+
+           <div id="assignments">
+               <!-- This will serve as a directory to see the pages for assignemnts.-->
+               <h2>Assignments</h2>
+               <ol>
+                   <li><a href="https://github.com/adk3798/5130f2022/tree/main/hw0-survey">Homework 0</a></li>
+                   <li><a href="https://github.com/adk3798/5130f2022/tree/main/hw1-ReflectionsIdeasAndPlanning">Homework 1</a></li>
+               </ol>
+           </div>
+           <!-- footer which will contain just a link to my email -->
+           <div id="footer">
+               <p> Contact me: <a class="email" href="mailto:adam_king@student.uml.edu">adam_king@student.uml.edu</a> </p>
+           </div>
+        </div>
+
+         <p>
+             <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                 <img style="border:0;width:88px;height:31px"
+                     src="http://jigsaw.w3.org/css-validator/images/vcss"
+                     alt="Valid CSS!" />
+             </a>
+         </p>
+   </body>
+</html>
