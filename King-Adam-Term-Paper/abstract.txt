@@ -1,0 +1,8 @@
+In this paper, I will go over recommendation systems, which are algorithms used for
+content recommendation. Recommendation systems have become increasingly important on
+the Internet as more and more users find themselves on a handful of centralized
+websites that use such systems to help decide what content they will be shown. Using
+the recommendation system that provides the highest user satisfaction is critical
+for modern social media (and many other types of) sites to retain users. Therefore,
+exploring the current avaialble algorithms and principles that make a successful
+recommendation system is a worthy endeavor.
