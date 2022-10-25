@@ -1,0 +1,332 @@
+/*
+File: /~aking/public_html/css/style.css
+Internet and WEb Systems Assignemnt 2: First Web Page
+Adam M. King, UMass Lowell Computer Science Student
+adam_king@student.uml.edu
+uml.cs username: aking
+Updated October 2nd, 2022
+Description: This is the css file used to style the html found at
+/~adking/public_html/index.html. That file is a very basic file but this
+style sheet make it look much nicer.
+*/
+
+/*
+For the body section the main thing is the sizing and the background. I have a
+sort of gradient background visible everywhere below the page's header and
+social navbar. I alos gave margin of 0 and min-height 100% becuase I wanted the
+body to take up the whole page with no whitespace on any side.
+*/
+body {
+  background-image: url('../images/spooky-forest-123.jpg');
+  background-size: cover;
+  background-repeat: repeat-x;
+  margin: 0px;
+  padding-bottom: 100px;
+  min-height: 100%;
+}
+
+/*
+This is the section that has my name and school. I gave it a different background
+from the rest of the page because I thought that looked better. The grid rows are to
+help keep the text at the correct height within the header and the min-width keeps
+the text from getting too squished and spreading outside of the header.
+*/
+#intro {
+    text-align: center;
+    height: 270px;
+    min-width: 830px;
+    background-image: url('../images/evil-eyes-skdfnkansdf.jpg');
+    display: grid;
+    grid-template-rows: 30px 150px 90px;
+    margin-bottom: 0px;
+}
+
+/*
+Both the #intro h1 and #intro p sections are mostly just text styling as well
+as auto margins to keep the text centered.
+*/
+#intro h1 {
+  font-size: 60pt;
+  grid-row: 2/3;
+  vertical-align: middle;
+  margin-top: auto;
+  margin-bottom: auto;
+  color: red
+}
+
+#intro p {
+  font-size: 40pt;
+  font-style: italic;
+  grid-row: 3/4;
+  margin-top: auto;
+  margin-bottom: auto;
+  color: white
+}
+
+/*
+The social navbar will keep a bunch of links to social media. The min-width
+was picked to stop the links from getting too squished
+*/
+#social {
+    background: #cce5ff;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    height: 50px;
+    min-width: 830px;
+    max-width: 100%;
+}
+
+#your-name {
+    background: #ff9999;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    margin-left: 50px;
+    height: 150px;
+    min-width: 200px;
+    max-width: 400px;
+}
+
+/*
+This section is mostly about spacing the about me, assignments and footer
+section of the page. I did this using a grid. I alos used this section to
+center the page (auto left/right margin) and make sure the content
+wasn't too close to the social bar (top margin)
+*/
+#wrapper {
+  display: grid;
+  grid-template-columns: 300px;
+  grid-template-rows: 300px;
+  margin-right: auto;
+  margin-left: 50px;
+  max-width: 80%;
+  min-width: 830px;
+  margin-top: 20px;
+  color: #00ccff
+}
+
+/*
+This sections is for organizing the elements within the about me section.
+It is done with a simple two column grid, one for my picture, one for
+about me info.
+*/
+#current-location {
+  grid-row: 1/2;
+  grid-column: 1/2;
+  grid-template-columns: 300px;
+  border: 3px solid #ff0000;
+  padding: 10px;
+}
+
+#wrapper h2{
+  font-size: 16pt;
+  text-align: left;
+}
+
+#user-from {
+  grid-row: 1/2;
+  grid-column: 2/3;
+  padding: 10px;
+  grid-template-columns: 300px minmax(200px, 1fr);
+  border: 3px solid #ff0000;
+}
+
+#user-want-be-in {
+  grid-row: 1/2;
+  grid-column: 3/4;
+  padding: 10px;
+  grid-template-columns: 300px minmax(200px, 1fr);
+  border: 3px solid #ff0000;
+}
+
+#user-family-from {
+  grid-row: 1/2;
+  grid-column: 4/5;
+  padding: 10px;
+  grid-template-columns: 300px minmax(200px, 1fr);
+  border: 3px solid #ff0000;
+}
+
+#user-birth-location {
+  grid-row: 2/3;
+  grid-column: 1/2;
+  padding: 10px;
+  grid-template-columns: 300px minmax(200px, 1fr);
+  border: 3px solid #ff0000;
+}
+
+#user-live-now {
+  grid-row: 2/3;
+  grid-column: 2/3;
+  padding: 10px;
+  grid-template-columns: 300px minmax(200px, 1fr);
+  border: 3px solid #ff0000;
+}
+
+#user-like-live {
+  grid-row: 2/3;
+  grid-column: 3/4;
+  padding: 10px;
+  grid-template-columns: 300px minmax(200px, 1fr);
+  border: 3px solid #ff0000;
+}
+
+#user-so-born {
+  grid-row: 2/3;
+  grid-column: 4/5;
+  padding: 10px;
+  grid-template-columns: 300px minmax(200px, 1fr);
+  border: 3px solid #ff0000;
+}
+
+#user-portfolio {
+  grid-row: 1/2;
+  grid-column: 1/3;
+  padding: 10px;
+  grid-template-columns: 400px minmax(200px, 1fr);
+  border: 3px solid #ff0000;
+}
+
+#family-portfolio {
+  grid-row: 1/2;
+  grid-column: 3/5;
+  padding: 10px;
+  grid-template-columns: 400px minmax(200px, 1fr);
+  border: 3px solid #ff0000;
+}
+
+#favorite-color-div {
+  grid-row: 1/2;
+  grid-column: 1/2;
+  padding: 10px;
+  grid-template-columns: 400px minmax(200px, 1fr);
+  border: 3px solid #ff0000;
+}
+
+#least-favorite-color-div {
+  grid-row: 1/2;
+  grid-column: 2/3;
+  padding: 10px;
+  grid-template-columns: 400px minmax(200px, 300px);
+  border: 3px solid #ff0000;
+}
+
+#favorite-cardinal-direction-div {
+  grid-row: 1/2;
+  grid-column: 3/4;
+  padding: 10px;
+  grid-template-columns: 400px minmax(200px, 300px);
+  border: 3px solid #ff0000;
+}
+
+#favorite-digit-div {
+  grid-row: 1/2;
+  grid-column: 4/5;
+  padding: 10px;
+  grid-template-columns: 400px minmax(200px, 300px);
+  border: 3px solid #ff0000;
+}
+
+/*
+The next two sections do a combination of giving my image proper padding so it
+isn't too close to the text as well as make it show up in an oval shape instead
+of the rectangle it is by default (all those 50% border lines)
+*/
+#about .me {
+  grid-column: 1/2;
+  padding: 20px;
+  overflow: hidden;
+  min-width: 270px;
+}
+
+#about .me img {
+  display: inline-block;
+  position: relative;
+  min-height: 300px;
+  max-width: 250px;
+  border-top-left-radius: 50% 50%;
+  border-top-right-radius: 50% 50%;
+  border-bottom-right-radius: 50% 50%;
+  border-bottom-left-radius: 50% 50%;
+}
+
+
+/*
+All the about info sections are pretty straightforward. Mostly just text styling
+with a bit of spacing.
+*/
+#about #about_info {
+  grid-column: 2/3;
+  min-width: 200px;
+}
+
+#about_info h3{
+  font-size: 32pt;
+  padding: 5px;
+  margin: 5px;
+}
+
+#about_info p{
+  font-size: 16pt;
+  font-style: italic;
+  padding: 5px;
+  padding-bottom: 10px;
+  margin: 5px;
+}
+
+#about_info ul{
+  list-style-type: circle;
+}
+
+#about_info li{
+  font-size: 16pt;
+  font-style: italic;
+  padding: 5px;
+}
+
+
+/*
+I styled the assignments links exactly the same as the social bar links. No decorations,
+black text, red background on hover.
+*/
+#assignments a {
+  color: #111111;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 15pt;
+}
+
+#assignments a:hover {
+  background-color: #ff0000;
+}
+
+/*
+No fancy styling in the footer section, jsut made sure it ook up the right portion of
+the grid, centered the text and styled the font
+*/
+#footer {
+  grid-row: 2/3;
+  grid-column: 1/3;
+  text-align: center;
+  font-style: italic;
+  padding-top: 50px;
+}
+
+#favorite-color {
+  width: 200px;
+  height: 100px;
+}
+
+#favorite-digit {
+  width: 200px;
+  height: 100px;
+  font-size: 50px
+}
+
+#least-favorite-color {
+  width: 200px;
+  height: 100px;
+}
+
+#confirmed {
+  color: red
+}

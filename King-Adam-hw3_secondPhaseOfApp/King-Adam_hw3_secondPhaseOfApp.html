@@ -1,0 +1,242 @@
+<!-- this work was created entirely by me, Adam King, with the exception of
+the background images themselves and the CSS verification sticker.
+It is heavily based on a past assignment I did with similar requirements -->
+
+<!DOCTYPE html>
+<html lang="en">
+<!--
+File: /~aking/public_html/index.html
+Internet and WEb Systems Assignemnt 2: First Web Page
+Adam M. King, UMass Lowell Computer Science Student
+adam_king@student.uml.edu
+uml.cs username: aking
+Updated October 1, 2022
+-->
+   <head>
+       <meta charset="utf-8">
+       <title>
+           Adam King HW3 2nd Phase of App
+       </title>
+       <link href="css/style2.css" rel="stylesheet">
+   </head>
+   <body>
+     <div id="intro">
+         <!-- Intro header with my name and school -->
+         <h1>Welcome</h1>
+         <p>Please Enter Your Information</p>
+     </div>
+     <div id="your-name">
+       <!-- Intro header with my name and school -->
+       <h2>Your Name</h2>
+       <form id='your-name-form'>
+         <label for="user_fname">First name:</label><br>
+         <input type="text" id="user_fname" name="user_fname"><br>
+         <label for="user_lname">Last name:</label><br>
+         <input type="text" id="user_lname" name="user_lname">
+       </form>
+     </div>
+     <h1 style="color:blue">Location Info</h1>
+       <!-- the wrapper div will hold everything outside of the header and social nav bar
+       this includes the about me section, my picture, the footer and assignment links -->
+       <div id="wrapper">
+
+           <div id="current-location">
+             <h2>Your Current Location</h2>
+             <form id='current-location-form'>
+               <label for="current_location_address">Street Address:</label><br>
+               <input type="text" id="current_location_address" name="current_location_address"><br>
+               <label for="current_location_zip">ZIP Code (Optional):</label><br>
+               <input type="text" id="current_location_zip" name="current_location_zip"><br>
+               <label for="current_location_city">City/Town:</label><br>
+               <input type="text" id="current_location_city" name="current_location_city"><br>
+               <label for="current_location_country">Country:</label><br>
+               <input type="text" id="current_location_country" name="current_location_country">
+             </form>
+           </div>
+           <div id="user-from">
+             <h2>Where Are You From</h2>
+             <form id='current-location-form'>
+               <label for="current_location_address">Street Address:</label><br>
+               <input type="text" id="current_location_address" name="current_location_address"><br>
+               <label for="current_location_zip">ZIP Code (Optional):</label><br>
+               <input type="text" id="current_location_zip" name="current_location_zip"><br>
+               <label for="current_location_city">City/Town:</label><br>
+               <input type="text" id="current_location_city" name="current_location_city"><br>
+               <label for="current_location_country">Country:</label><br>
+               <input type="text" id="current_location_country" name="current_location_country">
+             </form>
+           </div>
+           <div id="user-want-be-in">
+             <h2>Where Would You Like To Be</h2>
+             <form id='user-want-be-in-form'>
+               <label for="user_want_be_in_address">Street Address:</label><br>
+               <input type="text" id="user_want_be_in_address" name="user_want_be_in_address"><br>
+               <label for="user_want_be_in_zip">ZIP Code (Optional):</label><br>
+               <input type="text" id="user_want_be_in_zip" name="user_want_be_in_zip"><br>
+               <label for="user_want_be_in_city">City/Town:</label><br>
+               <input type="text" id="user_want_be_in_city" name="user_want_be_in_city"><br>
+               <label for="user_want_be_in_country">Country:</label><br>
+               <input type="text" id="user_want_be_in_country" name="user_want_be_in_country">
+             </form>
+           </div>
+           <div id="user-family-from">
+             <h2>Where Is Your Family From</h2>
+             <form id='current-location-form'>
+               <label for="current_location_address">Street Address:</label><br>
+               <input type="text" id="current_location_address" name="current_location_address"><br>
+               <label for="current_location_zip">ZIP Code (Optional):</label><br>
+               <input type="text" id="current_location_zip" name="current_location_zip"><br>
+               <label for="current_location_city">City/Town:</label><br>
+               <input type="text" id="current_location_city" name="current_location_city"><br>
+               <label for="current_location_country">Country:</label><br>
+               <input type="text" id="current_location_country" name="current_location_country">
+             </form>
+           </div>
+           <div id="user-birth-location">
+             <h2>Where Were You Born</h2>
+             <form id='user-birth-form'>
+               <label for="user_birth_address">Street Address:</label><br>
+               <input type="text" id="user_birth_address" name="user_birth_address"><br>
+               <label for="user_birth_zip">ZIP Code (Optional):</label><br>
+               <input type="text" id="user_birth_zip" name="user_birth_zip"><br>
+               <label for="user_birth_city">City/Town:</label><br>
+               <input type="text" id="user_birth_city" name="user_birth_city"><br>
+               <label for="user_birth_country">Country:</label><br>
+               <input type="text" id="user_birth_country" name="user_birth_country">
+             </form>
+           </div>
+           <div id="user-live-now">
+             <h2>Where Do You Live Now</h2>
+             <form id='user-live-form'>
+               <label for="user_live_address">Street Address:</label><br>
+               <input type="text" id="user_live_address" name="user_live_address"><br>
+               <label for="user_live_zip">ZIP Code (Optional):</label><br>
+               <input type="text" id="user_live_zip" name="user_live_zip"><br>
+               <label for="user_live_city">City/Town:</label><br>
+               <input type="text" id="user_live_city" name="user_live_city"><br>
+               <label for="user_live_country">Country:</label><br>
+               <input type="text" id="user_live_country" name="user_live_country">
+             </form>
+           </div>
+           <div id="user-like-live">
+             <h2>Where Would You Like to Live</h2>
+             <form id='user-like-live-form'>
+               <label for="user_like_live_address">Street Address:</label><br>
+               <input type="text" id="user_like_live_address" name="user_like_live_address"><br>
+               <label for="user_like_live_zip">ZIP Code (Optional):</label><br>
+               <input type="text" id="user_like_live_zip" name="user_like_live_zip"><br>
+               <label for="user_like_live_city">City/Town:</label><br>
+               <input type="text" id="user_like_live_city" name="user_like_live_city"><br>
+               <label for="user_like_live_country">Country:</label><br>
+               <input type="text" id="user_like_live_country" name="user_like_live_country">
+             </form>
+           </div>
+           <div id="user-so-born">
+             <h2>Where Did Your S/O Grow Up</h2>
+             <form id='current-location-form'>
+               <label for="current_location_address">Street Address:</label><br>
+               <input type="text" id="current_location_address" name="current_location_address"><br>
+               <label for="current_location_zip">ZIP Code (Optional):</label><br>
+               <input type="text" id="current_location_zip" name="current_location_zip"><br>
+               <label for="current_location_city">City/Town:</label><br>
+               <input type="text" id="current_location_city" name="current_location_city"><br>
+               <label for="current_location_country">Country:</label><br>
+               <input type="text" id="current_location_country" name="current_location_country">
+             </form>
+           </div>
+        </div>
+        <h1 style="color:blue">Investment Portfolio Information</h1>
+        <div id="wrapper">
+          <div id="user-portfolio">
+            <h2>Your Investment Portfolio</h2>
+            <form id="user-portfolio-form">
+              <p><label for="user_portfolio_text">Provide Summary of Your Investment Portfolio:</label></p>
+              <textarea id="user_portfolio_text" name="user_portfolio_text" rows="10" cols="50"></textarea><br>
+            </form>
+          </div>
+          <div id="family-portfolio">
+            <h2>Your Family's Investment Portfolio</h2>
+            <form id="family-portfolio-form">
+              <p><label for="family_portfolio_text">Provide Summary of Your Family's Investment Portfolio:</label></p>
+              <textarea id="family_portfolio_text" name="family_portfolio_text" rows="10" cols="50"></textarea><br>
+            </form>
+          </div>
+        </div>
+        <h1 style="color:blue">Picture of Yourself</h1>
+          <div id="picture-upload-div" style="">
+            <label style="color:blue">Upload Picture Of Yourself<br><br>
+              <input type="file" id="picture-upload" name="picture" accept="image/png, image/gif, image/jpeg" />
+            </label>
+          </div>
+        <h1 style="color:blue">Resume</h1>
+          <div id="resume-upload-div" style="">
+            <label style="color:blue">Upload Your Resume<br><br>
+              <input type="file" id="resume-upload" name="picture" />
+            </label>
+          </div>
+        <h1 style="color:blue">Miscellaneous Information</h1>
+        <div id="wrapper">
+          <div id="favorite-color-div">
+            <h2>Your Favorite Color</h2>
+            <label for="favorite-color">Click Color Box to Select Favorite Color</label><br><br>
+            <input type="color" id="favorite-color" value="#BEEF12">
+          </div>
+          <div id="least-favorite-color-div">
+            <h2>Your LEAST Favorite Color</h2>
+            <label for="least-favorite-color">Click Color Box to Select LEAST Favorite Color</label><br><br>
+            <input type="color" id="least-favorite-color" value="#99BEEF">
+          </div>
+          <div id="least-favorite-color-div">
+            <h2>Your LEAST Favorite Color</h2>
+            <label for="least-favorite-color">Click Color Box to Select LEAST Favorite Color</label><br><br>
+            <input type="color" id="least-favorite-color" value="#99BEEF">
+          </div>
+          <div id="favorite-cardinal-direction-div">
+            <h2>Your Favorite Cardinal Direction</h2>
+            <label for="north">North:</label>
+            <input type="radio" id="north" name="fav-direction" value="north" style="color:blue" checked="true"><br>
+            <label for="west">West:</label>
+            <input type="radio" id="west" name="fav-direction" value="west" style="color:blue"><br>
+            <label for="east">East:</label>
+            <input type="radio" id="east" name="fav-direction" value="east" style="color:blue"><br>
+            <label for="south">South:</label>
+            <input type="radio" id="south" name="fav-direction" value="south" style="color:blue"><br>
+          </div>
+          <div id="favorite-digit-div">
+            <h2>Your Favorite Digit</h2>
+            <label for="favorite-digit">Select Favorite Digit</label><br><br>
+            <select name="favorite-digit" id="favorite-digit">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select>
+          </div>
+        </div>
+        <br><br>
+        <button type="button" id="submitButton", style="width:200px;height:50px;font-size:20px" onclick="submit_func()">Submit Data!</button><p id="confirmed"></p>
+        <script>
+          function submit_func() {
+            let fname = document.getElementById("user_fname");
+            let lname = document.getElementById("user_lname");
+            var fn = fname.value;
+            var ln = lname.value;
+            if (fn.length === 0 || ln.length === 0) {
+              document.getElementById('confirmed').innerHTML = "Must provide first and last name to submit!"
+              return;
+            }
+            let res = "Data saved for ";
+            res += fn;
+            res += ' ';
+            res += ln;
+            document.getElementById('confirmed').innerHTML = res;
+          }
+        </script>
+   </body>
+</html>
