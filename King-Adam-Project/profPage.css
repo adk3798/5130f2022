@@ -1,0 +1,25 @@
+body {
+background-color: #FFFFFF;
+}
+.sectionClass {
+    width: 600px;
+    overflow: hidden;
+}
+.textClass {
+    width: 125px;
+    float:left;
+}
+.inputClass {
+    width: 300px;
+    overflow: hidden;
+}
+.normalButton {
+    color: black;
+    background-color: #e7e7e7;
+    
+}
+.importantButton {
+    color: white;
+    background-color: #f44336;
+    
+}

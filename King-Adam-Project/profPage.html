@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+
+<script type="text/javascript">
+function classChanged(selected){
+    // Ideally display the table here based on class selection
+    // needs further development
+}
+    
+function View() {
+    var pNumbers = document.getElementById("pNumbers");
+    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+    
+    if (regex.test(pNumbers.value.toLowerCase())) {
+        if (typeof (FileReader) != "undefined") {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var table = document.createElement("table");
+                var rows = e.target.result.split("\n");
+                for (var i = 0; i < rows.length; i++) {
+                    var cells = rows[i].split(",");
+                    if (cells.length > 1) {
+                        var row = table.insertRow(-1);
+                        for (var j = 0; j < cells.length; j++) {
+                            var cell = row.insertCell(-1);
+                            cell.innerHTML = cells[j];
+                        }
+                    }
+                }
+                var dvCSV = document.getElementById("dvCSV");
+                dvCSV.innerHTML = "";
+                dvCSV.appendChild(table);
+            }
+                reader.readAsText(pNumbers.files[0]);
+        } else {
+            alert("This browser does not support HTML5.");
+        }
+    } else {
+        alert("Please upload a valid CSV file.");
+    }
+}
+</script>
+
+
+
+
+<head>
+    <link rel="stylesheet" type="text/css" href="profPage.css">
+    <title>
+        Scott Gordon & Adam King Project
+    </title>
+</head>
+
+<body>
+    <div id = "nameplateContainer" class="nameplateContainer">
+            <div id="title" class="title">Permission Number Management Form</div>
+            <br>
+    </div>
+    <form id="pageForm">
+        <div id = "addClassDiv" class = "sectionClass">
+            <div id = "addClassText" class = "textClass">
+                <label for="addClass">Add Class:</label>
+            </div>
+            <div id = "addClassInput" class = "inputClass">
+                <input type="text" id="addClass" name="addClass" value=""><br>
+            </div>
+        </div>
+        <div id = "remClassDiv" class = "sectionClass">
+            <div id = "remClassText" class = "textClass">
+                <label for="remClass">Remove Class:</label>
+            </div>
+            <div id = "remClassInput" class = "inputClass">
+                <input type="text" id="remClass" name="remClass" value=""><br>
+            </div>
+        </div>
+        
+        <br>
+            
+        <div>Class:
+            <select name="class" id="class" onchange="classChanged(this)">
+                <option value="Class1" selected>NONE</option>
+                <option value="Class1">COMP5030</option>
+                <option value="Class2">COMP5130</option>
+                <option value="Class3">COMP5460</option>
+                <option value="Class4">COMP5610</option>
+            </select>
+        </div>
+        
+        <input type="button" id="viewTableButton" class="normalButton" value="View Existing" onclick="makeChanges()" />
+            
+        <br>
+        <br>
+        
+        <div>Add Permission Numbers:<br>
+            <textarea id="addFeedback" name="addFeedback" rows="4" cols="50"></textarea>
+        </div>
+        
+        <br>
+        
+        <div>Remove Permission Numbers:<br>
+            <textarea id="addFeedback" name="addFeedback" rows="4" cols="50"></textarea>
+        </div>
+        
+        <br>
+        
+        <input type="button" id="makeChangesButton" class="normalButton" value="Make Changes" onclick="makeChanges()" />
+        
+        <br>
+        <br>
+        
+        <input type="button" id="clearButton" class="importantButton" value="Clear Permission Numbers" onclick="clearPermissions()" />
+    </form>
+    
+    <input type="file" id="pNumbers"/><br>
+    <input type="button" id="view" value="View Permission Numbers" onclick="View()" />
+    
+    <div id="dvCSV">
+</body>
+
+
+
