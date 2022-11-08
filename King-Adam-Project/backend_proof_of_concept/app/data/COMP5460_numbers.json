@@ -1,0 +1,30 @@
+{
+    "123456": {
+        "taken": true,
+        "fname": "Hoom",
+        "lname": "An",
+        "id": "907854687",
+        "email": "thing@hotmail.com"
+    },
+    "987654": {
+        "taken": true,
+        "fname": "John",
+        "lname": "Smith",
+        "id": "123456789",
+        "email": "john_smith@gmail.com"
+    },
+    "547345": {
+        "taken": true,
+        "fname": "",
+        "lname": "",
+        "id": "",
+        "email": ""
+    },
+    "873945": {
+        "taken": false,
+        "fname": "",
+        "lname": "",
+        "id": "",
+        "email": ""
+    }
+}
