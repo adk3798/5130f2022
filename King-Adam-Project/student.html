@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
 <head>
-    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="student.css">
     <title>
         Scott Gordon & Adam King Project
     </title>
@@ -8,8 +8,9 @@
 
 <body>
   <div id = "nameplateContainer" class="nameplateContainer">
-          <div id="title" class="title">Student Permission Number Request Form</div><br>
+          <div id="title" class="title"><h1>Student Permission Number Request Form</h1></div>
   </div>
+  <div id="requestHeader" class="requestHeader"><h2>Request a number</h2></div><br>
   <form id="pageForm" action="javascript:checkValidInput()">
       <div>Class:
           <select name="class" id="class">
@@ -62,6 +63,60 @@
       <input type="submit" id="submitButton" value="Get Permission Number"/>
       <br>
       <label for="output" id="output"></label>
+  </form>
+
+  <br>
+  <div id="checkEmailHeader" class="checkEmailHeader"><h2>Check if you have assigned number by email address</h2></div>
+  <form id="checkEmailForm" action="javascript:checkEmailValidInput()">
+
+    <div>Class:
+        <select name="seClass" id="seClass">
+            <option value="None" selected>NONE</option>
+            <option value="COMP5030">COMP 5030</option>
+            <option value="COMP5130">COMP 5130</option>
+            <option value="COMP5460">COMP 5460</option>
+            <option value="COMP5610">COMP 5610</option>
+        </select>
+    </div><br>
+
+    <div id = "seEmailDiv" class = "sectionClass">
+        <div id = "seEmailText" class = "textClass">
+            <label for="seEmail">Student Email:</label>
+        </div>
+        <div id = "seEmailInput" class = "inputClass">
+            <input type="text" id="seEmail" name="scEmail" value=""><br>
+        </div>
+    </div><br>
+
+    <input type="submit" id="submitButton" value="Check For Permission Number by Email"/>
+    <label for="seOutput" id="seOutput"></label>
+  </form>
+
+  <br>
+  <div id="checkIDHeader" class="checkIDHeader"><h2>Check if you have assigned number by student ID</h2></div>
+  <form id="checkIDForm" action="javascript:checkIDValidInput()">
+
+    <div>Class:
+        <select name="sIDClass" id="sIDClass">
+            <option value="None" selected>NONE</option>
+            <option value="COMP5030">COMP 5030</option>
+            <option value="COMP5130">COMP 5130</option>
+            <option value="COMP5460">COMP 5460</option>
+            <option value="COMP5610">COMP 5610</option>
+        </select>
+    </div><br>
+
+    <div id = "siIDDiv" class = "sectionClass">
+        <div id = "siIDText" class = "textClass">
+            <label for="siID">Student ID:</label>
+        </div>
+        <div id = "siIDInput" class = "inputClass">
+            <input type="text" id="siID" name="siID" value=""><br>
+        </div>
+    </div><br>
+
+    <input type="submit" id="submitButton" value="Check For Permission Number by Student ID"/>
+    <label for="sIDOutput" id="sIDOutput"></label>
   </form>
 
   <script>
@@ -138,6 +193,84 @@
         }
       } else{
         output.innerHTML="Please input a valid first name";
+      }
+    }
+
+    function checkEmailValidInput(){
+      var vEmail = false;
+      var vClass = false;
+
+      var output = document.getElementById("seOutput");
+      var form = document.createElement("form");
+
+      var sEmail = document.createElement("input");
+      var classChoice = document.createElement("input");
+
+      form.method = "post";
+      form.action = "checkByEmail.php";
+
+      sEmail.value=document.getElementById('seEmail').value;
+      sEmail.setAttribute("type", "hidden");
+      sEmail.name="sEmail";
+      form.appendChild(sEmail);
+
+      classChoice.value=document.getElementById('seClass').value;
+      classChoice.setAttribute("type", "hidden");
+      classChoice.name="class";
+      form.appendChild(classChoice);
+
+      vEmail = validateEmail(sEmail.value);
+      vClass = validateClass(classChoice.value);
+
+      if(vEmail){
+        if(vClass){
+          output.innerHTML="";
+          document.body.appendChild(form);
+          form.submit();
+        } else {
+          output.innerHTML="Please select a valid class";
+        }
+      } else {
+        output.innerHTML="Please input a valid Email";
+      }
+    }
+
+    function checkIDValidInput(){
+      var vID = false;
+      var vClass = false;
+
+      var output = document.getElementById("sIDOutput");
+      var form = document.createElement("form");
+
+      var sID = document.createElement("input");
+      var classChoice = document.createElement("input");
+
+      form.method = "post";
+      form.action = "checkByID.php";
+
+      sID.value=document.getElementById('siID').value;
+      sID.setAttribute("type", "hidden");
+      sID.name="sID";
+      form.appendChild(sID);
+
+      classChoice.value=document.getElementById('sIDClass').value;
+      classChoice.setAttribute("type", "hidden");
+      classChoice.name="class";
+      form.appendChild(classChoice);
+
+      vID = validateID(sID.value);
+      vClass = validateClass(classChoice.value);
+
+      if(vID){
+        if(vClass){
+          output.innerHTML="";
+          document.body.appendChild(form);
+          form.submit();
+        } else {
+          output.innerHTML="Please select a valid class";
+        }
+      } else {
+        output.innerHTML="Please input a valid student ID (8 numerical characters)";
       }
     }
 
