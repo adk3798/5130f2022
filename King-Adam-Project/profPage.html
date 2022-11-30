@@ -1,41 +1,59 @@
 <!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
 
-<script type="text/javascript">
+<script type="text/javascript" type="module">
 function classChanged(selected){
     // Ideally display the table here based on class selection
     // needs further development
 }
-    
+
+
 function View() {
-    var pNumbers = document.getElementById("pNumbers");
-    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
-    
-    if (regex.test(pNumbers.value.toLowerCase())) {
-        if (typeof (FileReader) != "undefined") {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                var table = document.createElement("table");
-                var rows = e.target.result.split("\n");
-                for (var i = 0; i < rows.length; i++) {
-                    var cells = rows[i].split(",");
-                    if (cells.length > 1) {
-                        var row = table.insertRow(-1);
-                        for (var j = 0; j < cells.length; j++) {
-                            var cell = row.insertCell(-1);
-                            cell.innerHTML = cells[j];
-                        }
-                    }
-                }
-                var dvCSV = document.getElementById("dvCSV");
-                dvCSV.innerHTML = "";
-                dvCSV.appendChild(table);
+    //document.getElementById("numbersTable").remove();
+    //document.body.innerHTML += '<div id="numbersTable"></div>';
+
+
+    var e = document.getElementById("class");
+    var value = e.value;
+    var text = e.options[e.selectedIndex].text;
+    if(text == "NONE") return;
+
+    classFileString = "./data/"
+    classFileString += text;
+    classFileString += "_numbers.json";
+    console.log(classFileString);
+
+
+
+
+
+    fetch(classFileString)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            appendData(data);
+        })
+        .catch(function (err) {
+            console.log('error: ' + err);
+        });
+    function appendData(data) {
+        var mainContainer = document.getElementById("numbersTable");
+        for (let x in data) {
+            addString = "<pre>";
+            var div = document.createElement("div");
+            addString += x + ": \n";
+            //console.log(x + ": ");
+            for (let y in data[x]){
+                addString += "\t" + y + ": " + data[x][y] + "\n";
+                //console.log(y + ": " + data[x][y]);
             }
-                reader.readAsText(pNumbers.files[0]);
-        } else {
-            alert("This browser does not support HTML5.");
+            addString += "</pre>";
+            console.log(addString);
+            div.innerHTML = addString;
+            mainContainer.appendChild(div);
         }
-    } else {
-        alert("Please upload a valid CSV file.");
+
+
     }
 }
 </script>
@@ -77,11 +95,11 @@ function View() {
             
         <div>Class:
             <select name="class" id="class" onchange="classChanged(this)">
-                <option value="Class1" selected>NONE</option>
-                <option value="Class1">COMP5030</option>
-                <option value="Class2">COMP5130</option>
-                <option value="Class3">COMP5460</option>
-                <option value="Class4">COMP5610</option>
+                <option value="NONE" selected>NONE</option>
+                <option value="COMP5030">COMP5030</option>
+                <option value="COMP5130">COMP5130</option>
+                <option value="COMP5460">COMP5460</option>
+                <option value="COMP5610">COMP5610</option>
             </select>
         </div>
         
@@ -110,11 +128,10 @@ function View() {
         <input type="button" id="clearButton" class="importantButton" value="Clear Permission Numbers" onclick="clearPermissions()" />
     </form>
     
-    <input type="file" id="pNumbers"/><br>
+    <!--<input type="file" id="pNumbers"/><br>-->
     <input type="button" id="view" value="View Permission Numbers" onclick="View()" />
     
-    <div id="dvCSV">
+    <div id="numbersTable"></div>
 </body>
-
 
 
