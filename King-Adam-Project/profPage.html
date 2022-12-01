@@ -9,7 +9,7 @@ function classChanged(selected){
 function clearOthers(currentDiv) {
   // after selecting an action, clear the text we may have
   // already printed for other actions
-  var divs = ["numbersTable", "addNumbersOutput"];
+  var divs = ["numbersTable", "addNumbersOutput", "rmNumbersOutput"];
   for (const div of divs) {
     if (div != currentDiv) {
       console.log(div);
@@ -79,6 +79,25 @@ function addNumbers() {
     .then((response) => response.text())
     .then((add_nums_txt) => {
       out_div.innerHTML = add_nums_txt;
+    })
+}
+
+function rmNumbers() {
+  var selected_class = document.getElementById("class").value;
+  clearOthers("rmNumbersOutput");
+  var out_div = document.getElementById("rmNumbersOutput")
+  if (selected_class == "NONE") {
+    out_div.innerHTML = "<p style='color:red'>Please select a valid class!</p>"
+    return;
+  }
+  var nums = document.getElementById("rmNumbersText").value;
+  var rmNumForm = new FormData();
+  rmNumForm.append('class', selected_class);
+  rmNumForm.append('numbers', nums);
+  fetch("rmNumbers.php", {method: 'POST', body: rmNumForm})
+    .then((response) => response.text())
+    .then((rm_nums_txt) => {
+      out_div.innerHTML = rm_nums_txt;
     })
 }
 
@@ -155,12 +174,12 @@ function addNumbers() {
         <br>
 
         <div>Remove Permission Numbers:<br>
-            <textarea id="addFeedback" name="addFeedback" rows="4" cols="50"></textarea>
+            <textarea id="rmNumbersText" name="rmNumbersText" rows="6" cols="50"></textarea>
         </div>
 
         <br>
-
-        <input type="button" id="makeChangesButton" class="normalButton" value="Make Changes" onclick="makeChanges()" />
+        <input type="button" id="rmNumbersButton" class="normalButton" value="Remove Numbers for Class" onclick="rmNumbers()" />
+        <div id="rmNumbersOutput"></div>
 
         <br>
         <br>
