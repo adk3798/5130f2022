@@ -15,12 +15,24 @@
       <div>Class:
           <select name="class" id="class">
               <option value="None" selected>NONE</option>
-              <option value="COMP5030">COMP 5030</option>
-              <option value="COMP5130">COMP 5130</option>
-              <option value="COMP5460">COMP 5460</option>
-              <option value="COMP5610">COMP 5610</option>
           </select>
       </div><br>
+
+      <script type="text/javascript" type="module">
+      fetch("listClasses.php")
+        .then((response) => response.text())
+        .then((classes_txt) => {
+          var classList = document.getElementById('class');
+          var classes = classes_txt.split("\n");
+          var numClasses = classes.length;
+          for (var i = 0; i < numClasses; i++) {
+            var opt = document.createElement('option');
+            opt.value = classes[i];
+            opt.innerHTML = classes[i];
+            classList.appendChild(opt);
+          }
+        })
+      </script>
 
       <div id = "firstNameDiv" class = "sectionClass">
           <div id = "firstNameText" class = "textClass">
@@ -72,12 +84,24 @@
     <div>Class:
         <select name="seClass" id="seClass">
             <option value="None" selected>NONE</option>
-            <option value="COMP5030">COMP 5030</option>
-            <option value="COMP5130">COMP 5130</option>
-            <option value="COMP5460">COMP 5460</option>
-            <option value="COMP5610">COMP 5610</option>
         </select>
     </div><br>
+
+    <script type="text/javascript" type="module">
+    fetch("listClasses.php")
+      .then((response) => response.text())
+      .then((classes_txt) => {
+        var classList = document.getElementById('seClass');
+        var classes = classes_txt.split("\n");
+        var numClasses = classes.length;
+        for (var i = 0; i < numClasses; i++) {
+          var opt = document.createElement('option');
+          opt.value = classes[i];
+          opt.innerHTML = classes[i];
+          classList.appendChild(opt);
+        }
+      })
+    </script>
 
     <div id = "seEmailDiv" class = "sectionClass">
         <div id = "seEmailText" class = "textClass">
@@ -99,12 +123,24 @@
     <div>Class:
         <select name="sIDClass" id="sIDClass">
             <option value="None" selected>NONE</option>
-            <option value="COMP5030">COMP 5030</option>
-            <option value="COMP5130">COMP 5130</option>
-            <option value="COMP5460">COMP 5460</option>
-            <option value="COMP5610">COMP 5610</option>
         </select>
     </div><br>
+
+    <script type="text/javascript" type="module">
+    fetch("listClasses.php")
+      .then((response) => response.text())
+      .then((classes_txt) => {
+        var classList = document.getElementById('sIDClass');
+        var classes = classes_txt.split("\n");
+        var numClasses = classes.length;
+        for (var i = 0; i < numClasses; i++) {
+          var opt = document.createElement('option');
+          opt.value = classes[i];
+          opt.innerHTML = classes[i];
+          classList.appendChild(opt);
+        }
+      })
+    </script>
 
     <div id = "siIDDiv" class = "sectionClass">
         <div id = "siIDText" class = "textClass">

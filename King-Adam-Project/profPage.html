@@ -90,48 +90,58 @@ function View() {
                 <input type="text" id="remClass" name="remClass" value=""><br>
             </div>
         </div>
-        
+
         <br>
-            
+
         <div>Class:
             <select name="class" id="class" onchange="classChanged(this)">
                 <option value="NONE" selected>NONE</option>
-                <option value="COMP5030">COMP5030</option>
-                <option value="COMP5130">COMP5130</option>
-                <option value="COMP5460">COMP5460</option>
-                <option value="COMP5610">COMP5610</option>
             </select>
         </div>
-        
+
+        <script type="text/javascript" type="module">
+        fetch("listClasses.php")
+          .then((response) => response.text())
+          .then((classes_txt) => {
+            var classList = document.getElementById('class');
+            var classes = classes_txt.split("\n");
+            var numClasses = classes.length;
+            for (var i = 0; i < numClasses; i++) {
+              var opt = document.createElement('option');
+              opt.value = classes[i];
+              opt.innerHTML = classes[i];
+              classList.appendChild(opt);
+            }
+          })
+        </script>
+
         <input type="button" id="viewTableButton" class="normalButton" value="View Existing" onclick="makeChanges()" />
-            
+
         <br>
         <br>
-        
+
         <div>Add Permission Numbers:<br>
             <textarea id="addFeedback" name="addFeedback" rows="4" cols="50"></textarea>
         </div>
-        
+
         <br>
-        
+
         <div>Remove Permission Numbers:<br>
             <textarea id="addFeedback" name="addFeedback" rows="4" cols="50"></textarea>
         </div>
-        
+
         <br>
-        
+
         <input type="button" id="makeChangesButton" class="normalButton" value="Make Changes" onclick="makeChanges()" />
-        
+
         <br>
         <br>
-        
+
         <input type="button" id="clearButton" class="importantButton" value="Clear Permission Numbers" onclick="clearPermissions()" />
     </form>
-    
+
     <!--<input type="file" id="pNumbers"/><br>-->
     <input type="button" id="view" value="View Permission Numbers" onclick="View()" />
-    
+
     <div id="numbersTable"></div>
 </body>
-
-
