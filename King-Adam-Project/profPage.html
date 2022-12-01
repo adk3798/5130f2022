@@ -12,7 +12,6 @@ function clearOthers(currentDiv) {
   var divs = ["numbersTable", "addNumbersOutput", "rmNumbersOutput", "addClassOutput", "rmClassOutput", "clearNumbersOutput"];
   for (const div of divs) {
     if (div != currentDiv) {
-      console.log(div);
       document.getElementById(div).innerHTML = "";
     }
   }
@@ -61,43 +60,20 @@ function View() {
     //document.body.innerHTML += '<div id="numbersTable"></div>';
 
     clearOthers("numbersTable");
-    var e = document.getElementById("class");
-    var value = e.value;
-    var text = e.options[e.selectedIndex].text;
-    if(text == "NONE") return;
-
-    classFileString = "./data/"
-    classFileString += text;
-    classFileString += "_numbers.json";
-    console.log(classFileString);
-
-    fetch(classFileString)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            appendData(data);
-        })
-        .catch(function (err) {
-            console.log('error: ' + err);
-        });
-    function appendData(data) {
-        var mainContainer = document.getElementById("numbersTable");
-        for (let x in data) {
-            addString = "<pre>";
-            var div = document.createElement("div");
-            addString += x + ": \n";
-            //console.log(x + ": ");
-            for (let y in data[x]){
-                addString += "\t" + y + ": " + data[x][y] + "\n";
-                //console.log(y + ": " + data[x][y]);
-            }
-            addString += "</pre>";
-            console.log(addString);
-            div.innerHTML = addString;
-            mainContainer.appendChild(div);
-        }
+    var out_div = document.getElementById("numbersTable");
+    var selected_class = document.getElementById("class").value;
+    if(selected_class == "NONE") {
+      out_div.innerHTML = "<p style='color:red'>Please select a valid class!</p>"
+      return;
     }
+
+    var viewNumsForm = new FormData();
+    viewNumsForm.append('class', selected_class);
+    fetch("viewNumbers.php", {method: 'POST', body: viewNumsForm})
+      .then((response) => response.text())
+      .then((view_nums_txt) => {
+        out_div.innerHTML = view_nums_txt;
+      })
 }
 
 function addNumbers() {
