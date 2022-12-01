@@ -78,7 +78,7 @@
   </form>
 
   <br>
-  <div id="checkEmailHeader" class="checkEmailHeader"><h2>Check if you have assigned number by email address</h2></div>
+  <div id="checkEmailHeader" class="checkEmailHeader"><h2>Check if you have assigned number using email address</h2></div>
   <form id="checkEmailForm" action="javascript:checkEmailValidInput()">
 
     <div>Class:
@@ -112,12 +112,12 @@
         </div>
     </div><br>
 
-    <input type="submit" id="submitButton" value="Check For Permission Number by Email"/>
+    <input type="submit" id="submitButton" value="Check For Permission Number by Email"/><br>
     <label for="seOutput" id="seOutput"></label>
   </form>
 
   <br>
-  <div id="checkIDHeader" class="checkIDHeader"><h2>Check if you have assigned number by student ID</h2></div>
+  <div id="checkIDHeader" class="checkIDHeader"><h2>Check if you have assigned number using student ID</h2></div>
   <form id="checkIDForm" action="javascript:checkIDValidInput()">
 
     <div>Class:
@@ -151,12 +151,14 @@
         </div>
     </div><br>
 
-    <input type="submit" id="submitButton" value="Check For Permission Number by Student ID"/>
+    <input type="submit" id="submitButton" value="Check For Permission Number by Student ID"/><br>
     <label for="sIDOutput" id="sIDOutput"></label>
   </form>
 
   <script>
     function checkValidInput(){
+
+      var out_div = document.getElementById('output');
 
       var vFName = false;
       var vLName = false;
@@ -164,150 +166,124 @@
       var vSID = false;
       var vClass = false;
 
-      var output = document.getElementById("output");
+      var fName = document.getElementById('fName').value;
+      var lName = document.getElementById('lName').value;
+      var sEmail = document.getElementById('sEmail').value;
+      var sID = document.getElementById('sID').value;
+      var classChoice = document.getElementById('class').value;
 
-      var form = document.createElement("form");
-      var fName = document.createElement("input");
-      var lName = document.createElement("input");
-      var sEmail = document.createElement("input");
-      var sID = document.createElement("input");
-      var classChoice = document.createElement("input");
+      vFName = validateName(fName);
+      vLName = validateName(lName);
+      vEmail = validateEmail(sEmail);
+      vSID = validateID(sID);
+      vClass = validateClass(classChoice);
 
-      form.method = "post";
-      form.action = "student.php";
-
-      fName.value=document.getElementById('fName').value;
-      fName.setAttribute("type", "hidden");
-      fName.name="fName";
-      form.appendChild(fName);
-
-      lName.value=document.getElementById('lName').value;
-      lName.setAttribute("type", "hidden");
-      lName.name="lName";
-      form.appendChild(lName);
-
-      sEmail.value=document.getElementById('sEmail').value;
-      sEmail.setAttribute("type", "hidden");
-      sEmail.name="sEmail";
-      form.appendChild(sEmail);
-
-      sID.value=document.getElementById('sID').value;
-      sID.setAttribute("type", "hidden");
-      sID.name="sID";
-      form.appendChild(sID);
-
-      classChoice.value=document.getElementById('class').value;
-      classChoice.setAttribute("type", "hidden");
-      classChoice.name="class";
-      form.appendChild(classChoice);
-
-      vFName = validateName(fName.value);
-      vLName = validateName(lName.value);
-      vEmail = validateEmail(sEmail.value);
-      vSID = validateID(sID.value);
-      vClass = validateClass(classChoice.value);
-
-      if(vFName){
-        if(vLName){
-          if(vEmail){
-            if(vSID){
-              if(vClass){
-                output.innerHTML="";
-                document.body.appendChild(form);
-                form.submit();
-              } else {
-                output.innerHTML="Please select a valid class";
-              }
-            } else {
-              output.innerHTML="Please input a valid ID";
-            }
-          } else {
-            output.innerHTML="Please input a valid email";
-          }
-        } else {
-          output.innerHTML="Please input a valid last name";
-        }
-      } else{
-        output.innerHTML="Please input a valid first name";
+      var issues = "<span style='white-space: pre-line'>";
+      if(!vFName){
+        issues = issues + "Please input a valid first name\n";
       }
+      if(!vLName){
+        issues = issues + "Please input a valid last name\n";
+      }
+      if(!vEmail){
+        issues = issues + "Please input a valid email\n";
+      }
+      if(!vSID){
+        issues = issues + "Please input a valid ID\n";
+      }
+      if(!vClass){
+        issues = issues + "Please select a valid class\n";
+      }
+      issues = issues + "</span>";
+
+      if (issues != "<span style='white-space: pre-line'></span>") {
+        out_div.innerHTML = issues;
+        return;
+      }
+
+      var getNumForm = new FormData();
+      getNumForm.append('class', classChoice);
+      getNumForm.append('fName', fName);
+      getNumForm.append('lName', lName);
+      getNumForm.append('sID', sID);
+      getNumForm.append('sEmail', sEmail);
+      fetch("student.php", {method: 'POST', body: getNumForm})
+        .then((response) => response.text())
+        .then((student_txt) => {
+          out_div.innerHTML = student_txt;
+        })
     }
 
     function checkEmailValidInput(){
       var vEmail = false;
       var vClass = false;
 
-      var output = document.getElementById("seOutput");
-      var form = document.createElement("form");
+      var out_div = document.getElementById("seOutput");
 
-      var sEmail = document.createElement("input");
-      var classChoice = document.createElement("input");
+      var sEmail = document.getElementById('seEmail').value;
+      var classChoice = document.getElementById('seClass').value;
 
-      form.method = "post";
-      form.action = "checkByEmail.php";
+      vEmail = validateEmail(sEmail);
+      vClass = validateClass(classChoice);
 
-      sEmail.value=document.getElementById('seEmail').value;
-      sEmail.setAttribute("type", "hidden");
-      sEmail.name="sEmail";
-      form.appendChild(sEmail);
-
-      classChoice.value=document.getElementById('seClass').value;
-      classChoice.setAttribute("type", "hidden");
-      classChoice.name="class";
-      form.appendChild(classChoice);
-
-      vEmail = validateEmail(sEmail.value);
-      vClass = validateClass(classChoice.value);
-
-      if(vEmail){
-        if(vClass){
-          output.innerHTML="";
-          document.body.appendChild(form);
-          form.submit();
-        } else {
-          output.innerHTML="Please select a valid class";
-        }
-      } else {
-        output.innerHTML="Please input a valid Email";
+      var issues = "<span style='white-space: pre-line'>";
+      if(!vEmail){
+        issues = issues + "Please input a valid Email\n";
       }
+      if(!vClass){
+        issues = issues + "Please select a valid class\n";
+      }
+      issues = issues + "</span>";
+
+      if (issues != "<span style='white-space: pre-line'></span>") {
+        out_div.innerHTML = issues;
+        return;
+      }
+
+      var checkEmailForm = new FormData();
+      checkEmailForm.append('class', classChoice);
+      checkEmailForm.append('sEmail', sEmail);
+      fetch("checkByEmail.php", {method: 'POST', body: checkEmailForm})
+        .then((response) => response.text())
+        .then((check_email_txt) => {
+          out_div.innerHTML = check_email_txt;
+        })
     }
 
     function checkIDValidInput(){
       var vID = false;
       var vClass = false;
 
-      var output = document.getElementById("sIDOutput");
-      var form = document.createElement("form");
+      var out_div = document.getElementById("sIDOutput");
 
-      var sID = document.createElement("input");
-      var classChoice = document.createElement("input");
+      var sID = document.getElementById('siID').value;
+      var classChoice = document.getElementById('sIDClass').value;
 
-      form.method = "post";
-      form.action = "checkByID.php";
+      vID = validateID(sID);
+      vClass = validateClass(classChoice);
 
-      sID.value=document.getElementById('siID').value;
-      sID.setAttribute("type", "hidden");
-      sID.name="sID";
-      form.appendChild(sID);
-
-      classChoice.value=document.getElementById('sIDClass').value;
-      classChoice.setAttribute("type", "hidden");
-      classChoice.name="class";
-      form.appendChild(classChoice);
-
-      vID = validateID(sID.value);
-      vClass = validateClass(classChoice.value);
-
-      if(vID){
-        if(vClass){
-          output.innerHTML="";
-          document.body.appendChild(form);
-          form.submit();
-        } else {
-          output.innerHTML="Please select a valid class";
-        }
-      } else {
-        output.innerHTML="Please input a valid student ID (8 numerical characters)";
+      var issues = "<span style='white-space: pre-line'>";
+      if(!vID){
+        issues = issues + "Please input a valid student ID\n";
       }
+      if(!vClass){
+        issues = issues + "Please select a valid class\n";
+      }
+      issues = issues + "</span>";
+
+      if (issues != "<span style='white-space: pre-line'></span>") {
+        out_div.innerHTML = issues;
+        return;
+      }
+
+      var checkIDForm = new FormData();
+      checkIDForm.append('class', classChoice);
+      checkIDForm.append('sID', sID);
+      fetch("checkByID.php", {method: 'POST', body: checkIDForm})
+        .then((response) => response.text())
+        .then((check_id_txt) => {
+          out_div.innerHTML = check_id_txt;
+        })
     }
 
     function validateEmail(email) {
