@@ -9,7 +9,7 @@ function classChanged(selected){
 function clearOthers(currentDiv) {
   // after selecting an action, clear the text we may have
   // already printed for other actions
-  var divs = ["numbersTable", "addNumbersOutput", "rmNumbersOutput", "addClassOutput", "rmClassOutput", "clearNumbersOutput"];
+  var divs = ["numbersTable", "addNumbersOutput", "rmNumbersOutput", "addClassOutput", "rmClassOutput", "clearNumbersOutput", "freeNumbersOutput"];
   for (const div of divs) {
     if (div != currentDiv) {
       document.getElementById(div).innerHTML = "";
@@ -79,7 +79,7 @@ function View() {
 function addNumbers() {
   var selected_class = document.getElementById("class").value;
   clearOthers("addNumbersOutput");
-  var out_div = document.getElementById("addNumbersOutput")
+  var out_div = document.getElementById("addNumbersOutput");
   if (selected_class == "NONE") {
     out_div.innerHTML = "<p style='color:red'>Please select a valid class!</p>"
     return;
@@ -98,7 +98,7 @@ function addNumbers() {
 function rmNumbers() {
   var selected_class = document.getElementById("class").value;
   clearOthers("rmNumbersOutput");
-  var out_div = document.getElementById("rmNumbersOutput")
+  var out_div = document.getElementById("rmNumbersOutput");
   if (selected_class == "NONE") {
     out_div.innerHTML = "<p style='color:red'>Please select a valid class!</p>"
     return;
@@ -114,10 +114,29 @@ function rmNumbers() {
     })
 }
 
+function freeNumbers() {
+  var selected_class = document.getElementById("class").value;
+  clearOthers("freeNumbersOutput");
+  var out_div = document.getElementById("freeNumbersOutput");
+  if (selected_class == "NONE") {
+    out_div.innerHTML = "<p style='color:red'>Please select a valid class!</p>"
+    return;
+  }
+  var nums = document.getElementById("freeNumbersText").value;
+  var freeNumForm = new FormData();
+  freeNumForm.append('class', selected_class);
+  freeNumForm.append('numbers', nums);
+  fetch("freeNumbers.php", {method: 'POST', body: freeNumForm})
+    .then((response) => response.text())
+    .then((free_nums_txt) => {
+      out_div.innerHTML = free_nums_txt;
+    })
+}
+
 function clearPermissionNumbers() {
   var selected_class = document.getElementById("class").value;
   clearOthers("clearNumbersOutput");
-  var out_div = document.getElementById("clearNumbersOutput")
+  var out_div = document.getElementById("clearNumbersOutput");
   if (selected_class == "NONE") {
     out_div.innerHTML = "<p style='color:red'>Please select a valid class!</p>"
     return;
@@ -134,7 +153,7 @@ function clearPermissionNumbers() {
 function addClass() {
   var selected_class = document.getElementById("addClassTXT").value;
   clearOthers("addClassOutput");
-  var out_div = document.getElementById("addClassOutput")
+  var out_div = document.getElementById("addClassOutput");
   if (selected_class.length == 0) {
     out_div.innerHTML = "<p style='color:red'>Please provide a class name!</p>"
     return;
@@ -156,7 +175,7 @@ function addClass() {
 function rmClass() {
   var selected_class = document.getElementById("rmClassList").value;
   clearOthers("rmClassOutput");
-  var out_div = document.getElementById("rmClassOutput")
+  var out_div = document.getElementById("rmClassOutput");
   if (selected_class.length == 0) {
     out_div.innerHTML = "<p style='color:red'>Please provide a class name!</p>"
     return;
@@ -246,6 +265,15 @@ function rmClass() {
         <br>
         <input type="button" id="rmNumbersButton" class="normalButton" value="Remove Numbers for Class" onclick="rmNumbers()" />
         <div id="rmNumbersOutput"></div>
+
+        <br>
+        <div>Free Permission Numbers:<br>
+            <textarea id="freeNumbersText" name="freeNumbersText" rows="6" cols="50"></textarea>
+        </div>
+
+        <br>
+        <input type="button" id="freeNumbersButton" class="normalButton" value="Free Numbers for Class" onclick="freeNumbers()" />
+        <div id="freeNumbersOutput"></div>
 
         <br>
         <br>
