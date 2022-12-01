@@ -6,12 +6,24 @@ function classChanged(selected){
     // needs further development
 }
 
+function clearOthers(currentDiv) {
+  // after selecting an action, clear the text we may have
+  // already printed for other actions
+  var divs = ["numbersTable", "addNumbersOutput"];
+  for (const div of divs) {
+    if (div != currentDiv) {
+      console.log(div);
+      document.getElementById(div).innerHTML = "";
+    }
+  }
+}
+
 
 function View() {
     //document.getElementById("numbersTable").remove();
     //document.body.innerHTML += '<div id="numbersTable"></div>';
 
-
+    clearOthers("numbersTable");
     var e = document.getElementById("class");
     var value = e.value;
     var text = e.options[e.selectedIndex].text;
@@ -21,10 +33,6 @@ function View() {
     classFileString += text;
     classFileString += "_numbers.json";
     console.log(classFileString);
-
-
-
-
 
     fetch(classFileString)
         .then(function (response) {
@@ -52,10 +60,28 @@ function View() {
             div.innerHTML = addString;
             mainContainer.appendChild(div);
         }
-
-
     }
 }
+
+function addNumbers() {
+  var selected_class = document.getElementById("class").value;
+  clearOthers("addNumbersOutput");
+  var out_div = document.getElementById("addNumbersOutput")
+  if (selected_class == "NONE") {
+    out_div.innerHTML = "<p style='color:red'>Please select a valid class!</p>"
+    return;
+  }
+  var nums = document.getElementById("addNumbersText").value;
+  var addNumForm = new FormData();
+  addNumForm.append('class', selected_class);
+  addNumForm.append('numbers', nums);
+  fetch("addNumbers.php", {method: 'POST', body: addNumForm})
+    .then((response) => response.text())
+    .then((add_nums_txt) => {
+      out_div.innerHTML = add_nums_txt;
+    })
+}
+
 </script>
 
 
@@ -115,14 +141,16 @@ function View() {
           })
         </script>
 
-        <input type="button" id="viewTableButton" class="normalButton" value="View Existing" onclick="makeChanges()" />
-
         <br>
         <br>
 
         <div>Add Permission Numbers:<br>
-            <textarea id="addFeedback" name="addFeedback" rows="4" cols="50"></textarea>
+            <textarea id="addNumbersText" name="addNumbersText" rows="6" cols="50"></textarea>
         </div>
+
+        <br>
+        <input type="button" id="addNumbersButton" class="normalButton" value="Add Numbers for Class" onclick="addNumbers()" />
+        <div id="addNumbersOutput"></div>
 
         <br>
 
