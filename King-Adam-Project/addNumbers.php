@@ -16,6 +16,12 @@
       }
     }
 
+    foreach ($numbers as $n) {
+      if (empty($n)) {
+        unset($numbers[array_search($n, $numbers)]);
+      }
+    }
+
     if ($class_file == NULL) {
       echo "<p style='color:red'>Unknown class $class!</p>";
       return;

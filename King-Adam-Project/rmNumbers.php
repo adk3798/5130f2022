@@ -25,6 +25,12 @@
     $class_numbers_json = json_decode($class_numbers_txt, true);
     $number_exists = [];
 
+    foreach ($numbers as $n) {
+      if (empty($n)) {
+        unset($numbers[array_search($n, $numbers)]);
+      }
+    }
+
     foreach ($class_numbers_json as $key => $value) {
       if (in_array($key, $numbers)) {
         array_push($number_exists, $key);
