@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<head>
+    <title>
+        Scott Gordon & Adam King Project
+    </title>
+</head>
+
+<body>
+  <div id = "nameplateContainer" class="nameplateContainer">
+          <div id="title" class="title"><h1>Create Professor Account</h1></div>
+  </div>
+  <div id="requestHeader" class="requestHeader"><h2>Create Professor Account</h2></div><br>
+  <form id="pageForm" action="javascript:createAccount()">
+      <script type="text/javascript" type="module">
+      fetch("checkAccountExists.php")
+        .then((response) => response.text())
+        .then((txt) => {
+          if (txt == 'SUCCESS') {
+            window.location.href = 'profPage.html';
+          }
+        })
+      </script>
+
+      <div id = "emailDiv">
+          <div id = "emailText">
+              <label for="emailText">Email Address:</label>
+          </div>
+          <div id = "emailInput" class = "inputClass">
+              <input type="text" id="email" name="email" value=""><br>
+          </div>
+      </div>
+
+      <div id = "passwordDiv">
+          <div id = "passwordText">
+              <label for="passwordText">Password:</label>
+          </div>
+          <div id = "emailInput" class = "inputClass">
+              <input type="password" id="password" name="password" value=""><br>
+          </div>
+      </div>
+
+      <input type="submit" id="submitButton" value="Create Account"/>
+      <br>
+      <label for="output" id="output"></label>
+  </form>
+
+  <script>
+    function validateEmail(email) {
+      var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      var ctrl =  email;
+      return regex.test(ctrl);
+    }
+
+    function createAccount() {
+      var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+      var out_div = document.getElementById("output");
+
+      var issues = "<span style='white-space: pre-line'>";
+      if (password.length < 8) {
+        issues = issues + "Password must be at least 8 chars long\n";
+      }
+      if (!validateEmail(email)) {
+        issues = issues + "Invalid Email Address\n";
+      }
+      issues = issues + "</span>";
+      if (issues != "<span style='white-space: pre-line'></span>") {
+        out_div.innerHTML = issues;
+        return;
+      }
+
+      var createAccountForm = new FormData();
+      createAccountForm.append('email', email);
+      createAccountForm.append('password', password);
+      fetch("createAccount.php", {method: 'POST', body: createAccountForm})
+        .then((response) => response.text())
+        .then((txt) => {
+          if (txt == 'SUCCESS') {
+            window.location.href = 'profPage.html';
+          }
+        })
+    }
+  </script>

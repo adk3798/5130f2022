@@ -194,10 +194,45 @@ function rmClass() {
     })
 }
 
+function verifyLogin(func, out_div_name) {
+  clearOthers(out_div_name);
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("password").value;
+  var out_div = document.getElementById(out_div_name);
+  if (email.length == 0) {
+    out_div.innerHTML = "<p style='color:red'>Please provide your login email at the top of the page!</p>"
+    return;
+  }
+  if (password.length == 0) {
+    out_div.innerHTML = "<p style='color:red'>Please provide your login password at the top of the page!</p>"
+    return;
+  }
+  var checkLoginForm = new FormData();
+  checkLoginForm.append('fEmail', email);
+  checkLoginForm.append('fPassword', password);
+  fetch("checkLogin.php", {method: 'POST', body: checkLoginForm})
+    .then((response) => response.text())
+    .then((check_login_txt) => {
+      if (check_login_txt == 'SUCCESS') {
+        func();
+      } else {
+        out_div.innerHTML = "<p style='color:red'>Login failed. Incorrect email or password. Please enter correct email and password at top of page to make changes";
+        return;
+      }
+    })
+}
+
+function redirectIfNoAccount() {
+  fetch("checkAccountExists.php")
+    .then((response) => response.text())
+    .then((txt) => {
+      if (txt != 'SUCCESS') {
+        window.location.href = 'createAccount.html';
+      }
+    })
+}
+
 </script>
-
-
-
 
 <head>
     <link rel="stylesheet" type="text/css" href="profPage.css">
@@ -207,10 +242,32 @@ function rmClass() {
 </head>
 
 <body>
+    <script type="text/javascript" type="module">
+      redirectIfNoAccount();
+    </script>
     <div id = "nameplateContainer" class="nameplateContainer">
-            <div id="title" class="title">Permission Number Management Form</div>
-            <br>
+            <div id="title" class="title"><h1>Permission Number Management Form</h1></div>
     </div>
+
+    <h3>Login Info (Required to make changes to Permission Numbers)</h3>
+    <div id = "emailDiv">
+        <div id = "emailText">
+            <label for="emailText">Email Address:</label>
+        </div>
+        <div id = "emailInput" class = "inputClass">
+            <input type="text" id="email" name="email" value=""><br>
+        </div>
+    </div>
+
+    <div id = "passwordDiv">
+        <div id = "passwordText">
+            <label for="passwordText">Password:</label>
+        </div>
+        <div id = "emailInput" class = "inputClass">
+            <input type="password" id="password" name="password" value=""><br>
+        </div>
+    </div><br><br>
+
     <form id="pageForm">
         <div id = "addClassDiv" class = "sectionClass">
             <div id = "addClassText" class = "textClass">
@@ -218,10 +275,10 @@ function rmClass() {
             </div>
             <div id = "addClassInput" class = "inputClass">
                 <input type="text" id="addClassTXT" name="addClassTXT" value="">
-                <input type="button" id="addClassButton" class="normalButton" value="Add Class" onclick="addClass()" />
+                <input type="button" id="addClassButton" class="normalButton" value="Add Class" onclick="verifyLogin(addClass, 'addClassOutput')" />
                 <div id="addClassOutput"></div>
             </div>
-        </div>
+        </div><br>
         <div id = "remClassDiv" class = "sectionClass">
             <div id = "remClassText" class = "textClass">
                 <label for="remClass">Remove Class:</label>
@@ -229,7 +286,7 @@ function rmClass() {
             <div id = "remClassInput" class = "inputClass">
                 <select name="rmClassList" id="rmClassList" onchange="classChanged(this)">
                 </select>
-                <input type="button" id="rmClassButton" class="importantButton" value="Remove Class" onclick="rmClass()" />
+                <input type="button" id="rmClassButton" class="importantButton" value="Remove Class" onclick="verifyLogin(rmClass, 'rmClassOutput')" />
                 <div id="rmClassOutput"></div>
             </div>
         </div>
@@ -253,7 +310,7 @@ function rmClass() {
         </div>
 
         <br>
-        <input type="button" id="addNumbersButton" class="normalButton" value="Add Numbers for Class" onclick="addNumbers()" />
+        <input type="button" id="addNumbersButton" class="normalButton" value="Add Numbers for Class" onclick="verifyLogin(addNumbers, 'addNumbersOutput')" />
         <div id="addNumbersOutput"></div>
 
         <br>
@@ -263,7 +320,7 @@ function rmClass() {
         </div>
 
         <br>
-        <input type="button" id="rmNumbersButton" class="normalButton" value="Remove Numbers for Class" onclick="rmNumbers()" />
+        <input type="button" id="rmNumbersButton" class="normalButton" value="Remove Numbers for Class" onclick="verifyLogin(rmNumbers, 'rmNumbersOutput')" />
         <div id="rmNumbersOutput"></div>
 
         <br>
@@ -272,18 +329,18 @@ function rmClass() {
         </div>
 
         <br>
-        <input type="button" id="freeNumbersButton" class="normalButton" value="Free Numbers for Class" onclick="freeNumbers()" />
+        <input type="button" id="freeNumbersButton" class="normalButton" value="Free Numbers for Class" onclick="verifyLogin(freeNumbers, 'freeNumbersOutput')" />
         <div id="freeNumbersOutput"></div>
 
         <br>
         <br>
 
-        <input type="button" id="clearButton" class="importantButton" value="Clear Permission Numbers" onclick="clearPermissionNumbers()" />
+        <input type="button" id="clearButton" class="importantButton" value="Clear Permission Numbers" onclick="verifyLogin(clearPermissionNumbers, 'clearNumbersOutput')" />
         <div id="clearNumbersOutput"></div>
     </form>
 
     <!--<input type="file" id="pNumbers"/><br>-->
-    <input type="button" id="view" value="View Permission Numbers" onclick="View()" />
+    <input type="button" id="view" value="View Permission Numbers" onclick="verifyLogin(View, 'numbersTable')" />
 
     <div id="numbersTable"></div>
 </body>
