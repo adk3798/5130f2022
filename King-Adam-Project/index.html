@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<head>
+    <title>
+        Scott Gordon & Adam King Project
+    </title>
+</head>
+
+<body>
+  <div id = "nameplateContainer" class="nameplateContainer">
+          <div id="title" class="title"><h1>Permission++</h1></div>
+  </div><br>
+  <form id="pageForm" action="javascript:goToProfPage()">
+      <input type="submit" id="submitButton" value="I am a Professor trying to setup/modify permission numbers"/>
+  </form>
+  <br>
+  <form id="pageForm" action="javascript:goToStudentPage()">
+      <input type="submit" id="submitButton" value="I am a Student trying to get a permission number"/>
+  </form>
+
+  <script>
+    function goToProfPage() {
+      window.location.href = 'profPage.html';
+    }
+
+    function goToStudentPage() {
+      window.location.href = 'student.html';
+    }
+  </script>
