@@ -3,6 +3,10 @@
     $numbers_txt = $_POST["numbers"];
     $numbers = explode("\n", $numbers_txt);
 
+    foreach ($numbers as $n) {
+      $numbers[array_search($n, $numbers)] = str_replace(array("\r", "\n"), '', $n);
+    }
+
     $data_files = scandir('data');
     $class_file = NULL;
     $class_file_end = "_numbers.json";
