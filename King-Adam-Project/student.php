@@ -1,4 +1,5 @@
 <?php
+// This file was  developed primarily by Adam King (adam_king@student.uml.edu) with input from  Scott Gordon (scott_gordon@student.uml.edu)
     $first_name = $_POST["fName"];
     $last_name = $_POST["lName"];
     $student_email = $_POST["sEmail"];

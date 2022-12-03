@@ -1,4 +1,5 @@
 <?php
+// This file was  developed primarily by Adam King (adam_king@student.uml.edu) with input from  Scott Gordon (scott_gordon@student.uml.edu)
     $student_email = $_POST["sEmail"];
     $class = $_POST["class"];
     $class_numbers_filename = "data/$class" . "_numbers.json";

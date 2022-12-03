@@ -1,4 +1,5 @@
 <?php
+// This file was  developed primarily by Adam King (adam_king@student.uml.edu) with input from  Scott Gordon (scott_gordon@student.uml.edu)
     $class = $_POST["class"];
 
     $data_files = scandir('data');

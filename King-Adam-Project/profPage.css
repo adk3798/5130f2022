@@ -1,3 +1,4 @@
+/* This file was developed by Scott Gordon (scott_gordon@student.uml.edu) */
 body {
     background-color: #FFFFFF;
 }
@@ -16,10 +17,10 @@ body {
 .normalButton {
     color: black;
     background-color: #e7e7e7;
-    
+
 }
 .importantButton {
     color: white;
     background-color: #f44336;
-    
+
 }

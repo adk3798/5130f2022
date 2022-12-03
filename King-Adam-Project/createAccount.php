@@ -1,4 +1,5 @@
 <?php
+// This file was  developed primarily by Adam King (adam_king@student.uml.edu) with input from  Scott Gordon (scott_gordon@student.uml.edu)
   $email = $_POST["email"];
   $password = $_POST["password"];
   $password_hash = hash("sha256", $password);

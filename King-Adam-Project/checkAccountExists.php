@@ -1,4 +1,5 @@
 <?php
+// This file was  developed primarily by Adam King (adam_king@student.uml.edu) with input from  Scott Gordon (scott_gordon@student.uml.edu)
   $login_filename = 'data/login.json';
   if (!file_exists('data')) {
     mkdir('data', 0777, true);
